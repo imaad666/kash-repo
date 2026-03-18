@@ -85,6 +85,9 @@ body {
   max-width: 820px;
   margin: 0 auto;
   padding: 20px 18px 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .yearGroup {
@@ -102,10 +105,11 @@ body {
 }
 
 .photoFigure {
-  margin: 0 0 28px;
+  width: min(420px, 92vw);
+  margin: 0 0 26px;
 }
 
-.photoButton {
+.thumbnailButton {
   display: block;
   width: 100%;
   padding: 0;
@@ -113,9 +117,10 @@ body {
   background: transparent;
   cursor: pointer;
   outline: none;
+  text-align: left;
 }
 
-.photoButton:focus-visible .imageWrap {
+.thumbnailButton:focus-visible .imageWrap {
   box-shadow: var(--shadow), 0 0 0 4px rgba(0, 0, 0, 0.12);
 }
 
@@ -152,7 +157,7 @@ body {
   transition: opacity 180ms ease, transform 180ms ease;
 }
 
-.photoButton.open .noteOverlay {
+.photoFigure.openNote .noteOverlay {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
@@ -186,6 +191,28 @@ body {
   padding-top: 12px;
 }
 
+.titleButton {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+  outline: none;
+  font: inherit;
+  color: rgba(0, 0, 0, 0.78);
+  font-weight: 500;
+}
+
+.titleButton:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.titleButton:focus-visible {
+  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.12);
+  border-radius: 10px;
+}
+
 .captionTitle {
   font-size: 0.95rem;
   color: rgba(0, 0, 0, 0.78);
@@ -206,5 +233,83 @@ body {
   .noteOverlay {
     transition: none;
   }
+}
+
+/* Modal */
+.modalOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 18px;
+}
+
+.modalPanel {
+  width: min(1040px, 100%);
+  max-height: min(92vh, 860px);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 24px 70px rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+  display: grid;
+  grid-template-columns: 1fr;
+}
+
+.modalTopbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 14px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.modalTitle {
+  font-weight: 600;
+}
+
+.modalClose {
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 12px;
+  padding: 8px 10px;
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+.modalImageWrap {
+  position: relative;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+.modalImageWrap img {
+  width: 100%;
+  max-height: 70vh;
+  object-fit: contain;
+  display: block;
+}
+
+.modalNote {
+  padding: 14px;
+  border-top: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.imageError {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.88);
+  color: rgba(0, 0, 0, 0.72);
+  text-align: center;
+  font-size: 0.95rem;
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(0, 0, 0, 0.06);
 }
 
