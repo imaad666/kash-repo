@@ -1,0 +1,4 @@
+# Ignore Cursor project metadata/rules
+.cursor/
+.cursorignore
+
