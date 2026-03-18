@@ -2,7 +2,7 @@ const photos = [
   {
     id: "rajbagh-extension-1jun2020",
     year: 2020,
-    src: "./pics/rajbagh_extension_1jun2020.jpg",
+    src: "./pics/rajbagh_extension_1jun2020.png",
     alt: "Rajbagh Extension, 1 Jun 2020",
     title: "Rajbagh Extension",
     location: "Rajbagh",
