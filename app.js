@@ -30,6 +30,16 @@ const photos = [
     note: "",
   },
   {
+    id: "shankar-acharya-temple-03january2021",
+    year: 2021,
+    src: "./pics/ShankarAcharyaTemple_03january2021.jpeg",
+    alt: "Shankar Acharya Temple, 03 January 2021",
+    title: "Shankar Acharya Temple",
+    location: "Shankar Acharya",
+    dateLabel: "03 January 2021",
+    note: "",
+  },
+  {
     id: "fatehkadal-4nov2022",
     year: 2022,
     src: "./pics/fatehkadal_4nov2022.jpeg",
