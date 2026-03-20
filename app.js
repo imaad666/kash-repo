@@ -29,6 +29,26 @@ const photos = [
     dateLabel: "10 Jun 2021",
     note: "",
   },
+  {
+    id: "fatehkadal-4nov2022",
+    year: 2022,
+    src: "./pics/fatehkadal_4nov2022.jpeg",
+    alt: "Fatehkadal, 4 Nov 2022",
+    title: "Fatehkadal",
+    location: "Fatehkadal",
+    dateLabel: "4 Nov 2022",
+    note: "",
+  },
+  {
+    id: "chashmeshahi-dal-5may2024",
+    year: 2024,
+    src: "./pics/chashmeshahi_dal_5may2024.jpeg",
+    alt: "Chashmeshahi Dal, 5 May 2024",
+    title: "Chashmeshahi",
+    location: "Dal",
+    dateLabel: "5 May 2024",
+    note: "",
+  },
 ];
 
 const archiveEl = document.getElementById("archive");
