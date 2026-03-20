@@ -50,6 +50,16 @@ const photos = [
     note: "",
   },
   {
+    id: "malaratta-01nov2022",
+    year: 2022,
+    src: "./pics/malaratta_01nov2022.jpeg",
+    alt: "Malaratta, 01 Nov 2022",
+    title: "Malaratta",
+    location: "Malaratta",
+    dateLabel: "01 Nov 2022",
+    note: "",
+  },
+  {
     id: "chashmeshahi-dal-5may2024",
     year: 2024,
     src: "./pics/chashmeshahi_dal_5may2024.jpeg",
