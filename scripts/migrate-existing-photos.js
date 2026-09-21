@@ -39,7 +39,7 @@ function parseFilename(filename) {
 
   const day = parseInt(dayStr, 10);
   const year = parseInt(yearStr, 10);
-  const date = new Date(year, month, day);
+  const date = new Date(Date.UTC(year, month, day));
   return { title: humanizeName(namePart), date };
 }
 

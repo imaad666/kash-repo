@@ -6,7 +6,7 @@ const MONTH_LABELS = [
 ];
 
 function formatDateLabel(date) {
-  return `${date.getDate()} ${MONTH_LABELS[date.getMonth()]} ${date.getFullYear()}`;
+  return `${date.getUTCDate()} ${MONTH_LABELS[date.getUTCMonth()]} ${date.getUTCFullYear()}`;
 }
 
 module.exports = async function handler(req, res) {
@@ -28,7 +28,7 @@ module.exports = async function handler(req, res) {
 
         return {
           id: resource.public_id,
-          year: date.getFullYear(),
+          year: date.getUTCFullYear(),
           src: resource.secure_url,
           alt: `${title}, ${formatDateLabel(date)}`,
           title,

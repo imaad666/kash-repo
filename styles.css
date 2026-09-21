@@ -305,6 +305,106 @@ body {
   border-top: 1px solid rgba(0, 0, 0, 0.08);
 }
 
+.navLink {
+  margin-left: 12px;
+  font-size: 0.85rem;
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.navLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* Auth / upload pages */
+.authPage {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+
+.authCard {
+  width: min(420px, 100%);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  padding: 28px 26px;
+}
+
+.authCard h1 {
+  margin: 0 0 18px;
+  font-size: 1.2rem;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.field label {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+
+.field input,
+.field textarea {
+  border: 1px solid var(--border);
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font: inherit;
+  color: var(--text);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.authButton {
+  width: 100%;
+  border: 0;
+  border-radius: 12px;
+  padding: 12px 14px;
+  background: var(--text);
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.authButton:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.formMessage {
+  margin-top: 12px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+
+.formMessage.error {
+  color: #b3261e;
+}
+
+.formMessage.success {
+  color: #146c2e;
+}
+
+.uploadPreview {
+  width: 100%;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  display: block;
+}
+
 .imageError {
   position: absolute;
   inset: 0;
