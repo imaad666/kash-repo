@@ -1,8 +1,8 @@
 /* Clean white aesthetic */
 
 :root {
-  --bg: #ffffff;
-  --surface: #ffffff;
+  --bg: #fbf6ee;
+  --surface: rgba(255, 255, 255, 0.78);
   --text: #111111;
   --muted: #888888;
   --border: rgba(0, 0, 0, 0.07);
@@ -141,13 +141,17 @@ body {
   width: 100%;
   /* Preserve original aspect ratio; avoid fixed height to prevent letterboxing */
   height: auto;
-  border-radius: 16px;
-  overflow: hidden;
   background: transparent;
-  box-shadow: var(--shadow);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.imageWrap img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
   -webkit-mask-image:
     linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%),
     linear-gradient(to right,  transparent 0%, black 22%, black 78%, transparent 100%);
@@ -156,13 +160,6 @@ body {
     linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%),
     linear-gradient(to right,  transparent 0%, black 22%, black 78%, transparent 100%);
   mask-composite: intersect;
-}
-
-.imageWrap img {
-  width: 100%;
-  height: auto;
-  object-fit: contain; /* prevent cropping */
-  display: block;
 }
 
 .noteOverlay {
