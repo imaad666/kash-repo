@@ -21,7 +21,7 @@ form.addEventListener("submit", async (e) => {
       return;
     }
 
-    window.location.href = "/upload.html";
+    window.location.href = "/index.html";
   } catch (err) {
     messageEl.textContent = "Something went wrong. Try again.";
     messageEl.classList.add("error");
