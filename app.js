@@ -1,75 +1,12 @@
-const photos = [
-  {
-    id: "rajbagh-extension-1jun2020",
-    year: 2020,
-    src: "./pics/rajbagh_extension_1jun2020.png",
-    alt: "Rajbagh Extension, 1 Jun 2020",
-    title: "Rajbagh Extension",
-    location: "Rajbagh",
-    dateLabel: "1 Jun 2020",
-    note: "",
-  },
-  {
-    id: "rajbagh-extension-12july2020",
-    year: 2020,
-    src: "./pics/rajbagh_extension_12july2020.jpeg",
-    alt: "Rajbagh Extension, 12 Jul 2020",
-    title: "Rajbagh Extension",
-    location: "Rajbagh",
-    dateLabel: "12 Jul 2020",
-    note: "",
-  },
-  {
-    id: "hari-sing-highstreet-10jun2021",
-    year: 2021,
-    src: "./pics/hari_sing_highstreet_10jun2021.jpeg",
-    alt: "Hari Singh Highstreet, 10 Jun 2021",
-    title: "Hari Singh",
-    location: "Highstreet",
-    dateLabel: "10 Jun 2021",
-    note: "",
-  },
-  {
-    id: "shankar-acharya-temple-03january2021",
-    year: 2021,
-    src: "./pics/ShankarAcharyaTemple_03january2021.jpeg",
-    alt: "Shankar Acharya Temple, 03 January 2021",
-    title: "Shankar Acharya Temple",
-    location: "Shankar Acharya",
-    dateLabel: "03 January 2021",
-    note: "",
-  },
-  {
-    id: "fatehkadal-4nov2022",
-    year: 2022,
-    src: "./pics/fatehkadal_4nov2022.jpeg",
-    alt: "Fatehkadal, 4 Nov 2022",
-    title: "Fatehkadal",
-    location: "Fatehkadal",
-    dateLabel: "4 Nov 2022",
-    note: "",
-  },
-  {
-    id: "malaratta-01nov2022",
-    year: 2022,
-    src: "./pics/malaratta_01nov2022.jpeg",
-    alt: "Malaratta, 01 Nov 2022",
-    title: "Malaratta",
-    location: "Malaratta",
-    dateLabel: "01 Nov 2022",
-    note: "",
-  },
-  {
-    id: "chashmeshahi-dal-5may2024",
-    year: 2024,
-    src: "./pics/chashmeshahi_dal_5may2024.jpeg",
-    alt: "Chashmeshahi Dal, 5 May 2024",
-    title: "Chashmeshahi",
-    location: "Dal",
-    dateLabel: "5 May 2024",
-    note: "",
-  },
-];
+async function loadPhotos() {
+  const res = await fetch("/api/photos");
+  if (!res.ok) throw new Error(`Failed to load photos: ${res.status}`);
+  const { photos } = await res.json();
+
+  return photos.map((p) => ({ ...p, date: new Date(p.date) }));
+}
+
+let photos = [];
 
 const archiveEl = document.getElementById("archive");
 const yearSelectEl = document.getElementById("yearSelect");
@@ -93,6 +30,9 @@ function groupByYear() {
   for (const p of photos) {
     if (!map.has(p.year)) map.set(p.year, []);
     map.get(p.year).push(p);
+  }
+  for (const yearPhotos of map.values()) {
+    yearPhotos.sort((a, b) => a.date - b.date);
   }
   return Array.from(map.entries()).sort((a, b) => a[0] - b[0]);
 }
@@ -207,7 +147,7 @@ function openModalForPhoto(photo) {
   ensureModal();
   openModalPhotoId = photo.id;
 
-  modalTopTitleEl.textContent = `${photo.title} / ${photo.location}`;
+  modalTopTitleEl.textContent = photo.title;
   modalTopMetaEl.textContent = photo.dateLabel;
   modalImg.src = getPhotoDisplaySrc(photo);
   modalImg.alt = photo.alt;
@@ -312,7 +252,7 @@ function createPhotoFigure(photo) {
   const titleBtn = document.createElement("button");
   titleBtn.type = "button";
   titleBtn.className = "titleButton";
-  titleBtn.textContent = `${photo.title} / ${photo.location}`;
+  titleBtn.textContent = photo.title;
   titleBtn.setAttribute("aria-expanded", "false");
 
   const date = document.createElement("div");
@@ -423,7 +363,19 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-buildYearOptions();
-buildArchive();
-applyYearFilter("all");
+async function init() {
+  try {
+    photos = await loadPhotos();
+  } catch (e) {
+    archiveEl.textContent = "Couldn't load photos. Please try reloading the page.";
+    console.error(e);
+    return;
+  }
+
+  buildYearOptions();
+  buildArchive();
+  applyYearFilter("all");
+}
+
+init();
 

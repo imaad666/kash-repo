@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Upload — Ka$h Repo</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <div class="authPage">
+    <div class="authCard">
+      <h1>Add a photo</h1>
+      <form id="uploadForm">
+        <div class="field">
+          <label for="file">Photo</label>
+          <input type="file" id="file" name="file" accept="image/*" required />
+        </div>
+
+        <img id="preview" class="uploadPreview hidden" alt="" />
+
+        <div class="field">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" required />
+        </div>
+
+        <div class="field">
+          <label for="date">Date taken</label>
+          <input type="date" id="date" name="date" required />
+        </div>
+
+        <div class="field">
+          <label for="location">Location (leave blank to auto-detect from photo GPS)</label>
+          <input type="text" id="location" name="location" />
+        </div>
+
+        <div class="field">
+          <label for="note">Note (optional)</label>
+          <textarea id="note" name="note"></textarea>
+        </div>
+
+        <button type="submit" class="authButton" id="submitBtn">Upload</button>
+        <div id="message" class="formMessage"></div>
+      </form>
+    </div>
+  </div>
+
+  <script type="module" src="./upload.js"></script>
+</body>
+
+</html>

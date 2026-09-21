@@ -2,3 +2,8 @@
 .cursor/
 .cursorignore
 
+# Env vars and dependencies
+.env
+node_modules/
+
+.vercel
