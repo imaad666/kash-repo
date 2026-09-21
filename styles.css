@@ -96,12 +96,13 @@ body {
 
 .yearHeading {
   text-align: center;
-  font-weight: 800;
-  letter-spacing: 0.12em;
+  font-family: 'Merriweather', Georgia, serif;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   margin: 44px 0 26px;
   color: rgba(0, 0, 0, 0.75);
   text-transform: uppercase;
-  font-size: 1.15rem;
+  font-size: 1.1rem;
 }
 
 .photoFigure {
@@ -134,12 +135,19 @@ body {
   height: auto;
   border-radius: 16px;
   overflow: hidden;
-  border: 1px solid var(--border);
   background: transparent;
   box-shadow: var(--shadow);
   display: flex;
   align-items: center;
   justify-content: center;
+  -webkit-mask-image:
+    linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%),
+    linear-gradient(to right,  transparent 0%, black 22%, black 78%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image:
+    linear-gradient(to bottom, transparent 0%, black 22%, black 78%, transparent 100%),
+    linear-gradient(to right,  transparent 0%, black 22%, black 78%, transparent 100%);
+  mask-composite: intersect;
 }
 
 .imageWrap img {
@@ -221,14 +229,18 @@ body {
 }
 
 .captionTitle {
-  font-size: 0.95rem;
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 0.9rem;
   color: rgba(0, 0, 0, 0.78);
-  font-weight: 500;
+  font-weight: 400;
 }
 
 .captionDate {
   margin-top: 4px;
-  font-size: 0.85rem;
+  font-family: 'Merriweather', Georgia, serif;
+  font-size: 0.8rem;
+  font-weight: 300;
+  font-style: italic;
   color: var(--muted);
 }
 
