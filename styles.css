@@ -1,12 +1,12 @@
-/* Minimal cream/white aesthetic with consistent vertical portrait frames */
+/* Clean white aesthetic */
 
 :root {
-  --bg: #fbf6ee;
-  --surface: rgba(255, 255, 255, 0.78);
-  --text: #1f1f1f;
-  --muted: #6a6a6a;
-  --border: rgba(0, 0, 0, 0.08);
-  --shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  --bg: #ffffff;
+  --surface: #ffffff;
+  --text: #111111;
+  --muted: #888888;
+  --border: rgba(0, 0, 0, 0.07);
+  --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
 }
 
 * {
@@ -35,15 +35,19 @@ body {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  padding: 14px 18px;
-  background: color-mix(in srgb, var(--bg) 92%, #fff 8%);
+  padding: 16px 24px;
+  background: rgba(255, 255, 255, 0.85);
   border-bottom: 1px solid var(--border);
-  backdrop-filter: blur(10px);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
 }
 
 .brand {
-  font-weight: 600;
-  letter-spacing: 0.01em;
+  font-family: 'Merriweather', Georgia, serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+  color: var(--text);
 }
 
 .yearPicker {
@@ -56,17 +60,21 @@ body {
   appearance: none;
   border: 1px solid var(--border);
   background: var(--surface);
-  padding: 10px 34px 10px 12px;
-  border-radius: 12px;
-  font-size: 0.95rem;
+  padding: 8px 36px 8px 14px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-family: 'Merriweather', Georgia, serif;
   color: var(--text);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.03);
-  background-image: linear-gradient(45deg, transparent 50%, rgba(0, 0, 0, 0.6) 50%),
-    linear-gradient(135deg, rgba(0, 0, 0, 0.6) 50%, transparent 50%),
-    linear-gradient(to right, transparent, transparent);
-  background-position: calc(100% - 18px) 50%, calc(100% - 12px) 50%, 0 0;
-  background-size: 6px 6px, 6px 6px, 100% 100%;
+  cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='none' stroke='%23888' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round' d='M2 4l4 4 4-4'/%3E%3C/svg%3E");
+  background-position: calc(100% - 12px) 50%;
+  background-size: 12px 12px;
   background-repeat: no-repeat;
+}
+
+.yearPicker select:focus {
+  outline: none;
+  border-color: rgba(0, 0, 0, 0.25);
 }
 
 .srOnly {
@@ -97,12 +105,12 @@ body {
 .yearHeading {
   text-align: center;
   font-family: 'Merriweather', Georgia, serif;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  margin: 44px 0 26px;
-  color: rgba(0, 0, 0, 0.75);
-  text-transform: uppercase;
-  font-size: 1.1rem;
+  font-weight: 300;
+  font-style: italic;
+  letter-spacing: 0.02em;
+  margin: 56px 0 32px;
+  color: rgba(0, 0, 0, 0.35);
+  font-size: 1.5rem;
 }
 
 .photoFigure {
@@ -214,18 +222,18 @@ body {
   cursor: pointer;
   outline: none;
   font: inherit;
-  color: rgba(0, 0, 0, 0.78);
-  font-weight: 500;
+  color: var(--text);
+  font-weight: 400;
+  transition: opacity 150ms ease;
 }
 
 .titleButton:hover {
-  text-decoration: underline;
-  text-underline-offset: 3px;
+  opacity: 0.6;
 }
 
 .titleButton:focus-visible {
-  box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.12);
-  border-radius: 10px;
+  box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
 }
 
 .captionTitle {
@@ -292,12 +300,18 @@ body {
 }
 
 .modalClose {
-  border: 1px solid rgba(0, 0, 0, 0.12);
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 12px;
-  padding: 8px 10px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  border-radius: 8px;
+  padding: 6px 10px;
   cursor: pointer;
-  color: rgba(0, 0, 0, 0.75);
+  color: var(--muted);
+  font-size: 0.85rem;
+  transition: opacity 150ms ease;
+}
+
+.modalClose:hover {
+  opacity: 0.6;
 }
 
 .modalImageWrap {
