@@ -287,7 +287,7 @@ async function morphFly(fromRect, toRect, { revealFull = false } = {}) {
     }
   );
 
-  await Promise.all([anim.finished.catch(() => {}), waitForSoftEdgeFade()]);
+  await Promise.all([anim.finished.catch(() => { }), waitForSoftEdgeFade()]);
 
   Object.assign(flyEl.style, {
     left: `${toRect.left}px`,

@@ -7,41 +7,37 @@
   --muted: #888888;
   --border: rgba(0, 0, 0, 0.07);
   --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  --font-title: "Bodoni Moda", "Times New Roman", Times, serif;
+  --font-ui: "Merriweather", Georgia, serif;
   /* Soft dissolve into the page — longer, eased stops (less “cut”, more print-like). */
-  --photo-fade-y: linear-gradient(
-    to bottom,
-    transparent 0%,
-    rgba(0, 0, 0, 0.12) 3%,
-    rgba(0, 0, 0, 0.45) 8%,
-    rgba(0, 0, 0, 0.82) 16%,
-    #000 26%,
-    #000 74%,
-    rgba(0, 0, 0, 0.82) 84%,
-    rgba(0, 0, 0, 0.45) 92%,
-    rgba(0, 0, 0, 0.12) 97%,
-    transparent 100%
-  );
-  --photo-fade-x: linear-gradient(
-    to right,
-    transparent 0%,
-    rgba(0, 0, 0, 0.1) 2.5%,
-    rgba(0, 0, 0, 0.4) 7%,
-    rgba(0, 0, 0, 0.8) 14%,
-    #000 24%,
-    #000 76%,
-    rgba(0, 0, 0, 0.8) 86%,
-    rgba(0, 0, 0, 0.4) 93%,
-    rgba(0, 0, 0, 0.1) 97.5%,
-    transparent 100%
-  );
-  --photo-fade-radial: radial-gradient(
-    ellipse 96% 94% at 50% 48%,
-    #000 52%,
-    rgba(0, 0, 0, 0.92) 68%,
-    rgba(0, 0, 0, 0.55) 82%,
-    rgba(0, 0, 0, 0.18) 92%,
-    transparent 100%
-  );
+  --photo-fade-y: linear-gradient(to bottom,
+      transparent 0%,
+      rgba(0, 0, 0, 0.12) 3%,
+      rgba(0, 0, 0, 0.45) 8%,
+      rgba(0, 0, 0, 0.82) 16%,
+      #000 26%,
+      #000 74%,
+      rgba(0, 0, 0, 0.82) 84%,
+      rgba(0, 0, 0, 0.45) 92%,
+      rgba(0, 0, 0, 0.12) 97%,
+      transparent 100%);
+  --photo-fade-x: linear-gradient(to right,
+      transparent 0%,
+      rgba(0, 0, 0, 0.1) 2.5%,
+      rgba(0, 0, 0, 0.4) 7%,
+      rgba(0, 0, 0, 0.8) 14%,
+      #000 24%,
+      #000 76%,
+      rgba(0, 0, 0, 0.8) 86%,
+      rgba(0, 0, 0, 0.4) 93%,
+      rgba(0, 0, 0, 0.1) 97.5%,
+      transparent 100%);
+  --photo-fade-radial: radial-gradient(ellipse 96% 94% at 50% 48%,
+      #000 52%,
+      rgba(0, 0, 0, 0.92) 68%,
+      rgba(0, 0, 0, 0.55) 82%,
+      rgba(0, 0, 0, 0.18) 92%,
+      transparent 100%);
 }
 
 * {
@@ -211,7 +207,8 @@ body {
   position: absolute;
   inset: 0;
   display: flex;
-  align-items: flex-start; /* note appears at the top of the picture */
+  align-items: flex-start;
+  /* note appears at the top of the picture */
   justify-content: center;
   padding: 14px;
   background: rgba(255, 255, 255, 0.86);
@@ -263,9 +260,11 @@ body {
   background: transparent;
   cursor: pointer;
   outline: none;
-  font: inherit;
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
   color: var(--text);
-  font-weight: 400;
   transition: opacity 150ms ease;
 }
 
@@ -403,10 +402,11 @@ body {
 }
 
 .modalTitle {
-  font-family: 'Merriweather', Georgia, serif;
-  font-weight: 400;
-  font-size: 0.95rem;
-  color: rgba(255, 255, 255, 0.9);
+  font-family: var(--font-title);
+  font-weight: 500;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 .modalCaption .captionDate {
@@ -741,4 +741,3 @@ body.is-admin .archive {
   backdrop-filter: blur(6px);
   border: 1px solid rgba(0, 0, 0, 0.06);
 }
-
