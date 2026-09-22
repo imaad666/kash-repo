@@ -278,13 +278,6 @@ body {
   border-radius: 6px;
 }
 
-.captionTitle {
-  font-family: 'Merriweather', Georgia, serif;
-  font-size: 0.9rem;
-  color: rgba(0, 0, 0, 0.78);
-  font-weight: 400;
-}
-
 .captionDate {
   margin-top: 4px;
   font-family: 'Merriweather', Georgia, serif;
@@ -505,22 +498,6 @@ body {
   font-size: 1.05rem;
   color: rgba(0, 0, 0, 0.4);
   letter-spacing: 0.02em;
-}
-
-.navButton {
-  margin-left: 12px;
-  border: 1px solid var(--border);
-  background: transparent;
-  border-radius: 8px;
-  padding: 6px 10px;
-  font: inherit;
-  font-size: 0.85rem;
-  color: var(--muted);
-  cursor: pointer;
-}
-
-.navButton:hover {
-  color: var(--text);
 }
 
 .photoAdminActions {

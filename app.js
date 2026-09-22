@@ -148,10 +148,6 @@ function ensureModal() {
   document.body.appendChild(modalEl);
 }
 
-function getPhotoDisplaySrc(photo) {
-  if (photo._convertedObjectUrl) return photo._convertedObjectUrl;
-  return photo.src;
-}
 
 function updateModalNoteForPhoto(photo) {
   if (!modalEl || modalEl.classList.contains("hidden")) return;
@@ -310,7 +306,7 @@ async function openModalForPhoto(photo, sourceImg) {
   openModalPhotoId = photo.id;
   openSourceImg = sourceImg || null;
 
-  const src = getPhotoDisplaySrc(photo);
+  const src = photo.src;
   const thumbSrc = openSourceImg?.currentSrc || openSourceImg?.src || src;
 
   modalTopTitleEl.textContent = photo.title;
@@ -324,13 +320,7 @@ async function openModalForPhoto(photo, sourceImg) {
   modalImg.style.maxHeight = "";
   updateModalNoteForPhoto(photo);
 
-  const isHeic = photo.src.toLowerCase().endsWith(".heic");
-  if (isHeic && !photo._convertedObjectUrl) {
-    if (modalErrorEl) modalErrorEl.classList.remove("hidden");
-    tryConvertHeicToJpeg(modalImg, photo, modalErrorEl);
-  } else if (modalErrorEl) {
-    modalErrorEl.classList.add("hidden");
-  }
+  if (modalErrorEl) modalErrorEl.classList.add("hidden");
 
   const fromRect = openSourceImg ? copyRect(openSourceImg.getBoundingClientRect()) : null;
 
@@ -428,33 +418,6 @@ async function closeModal() {
     // ignore
   }
   finish();
-}
-
-async function tryConvertHeicToJpeg(img, photo, errorOverlay) {
-  if (photo._heicConversionAttempted) return;
-  photo._heicConversionAttempted = true;
-
-  // If conversion library can't be loaded, we just show an error overlay.
-  try {
-    const mod = await import("https://esm.sh/heic2any");
-    const heic2any = mod?.default || mod;
-
-    const res = await fetch(photo.src);
-    const blob = await res.blob();
-
-    const converted = await heic2any({ blob, toType: "image/jpeg", quality: 0.92 });
-    const outBlob = Array.isArray(converted) ? converted[0] : converted;
-
-    const url = URL.createObjectURL(outBlob);
-    photo._convertedObjectUrl = url;
-
-    if (errorOverlay) errorOverlay.classList.add("hidden");
-    img.style.display = "block";
-    img.src = url;
-  } catch (e) {
-    if (errorOverlay) errorOverlay.classList.remove("hidden");
-    img.style.display = "none";
-  }
 }
 
 function createPhotoFigure(photo) {
@@ -582,13 +545,8 @@ function createPhotoFigure(photo) {
   });
 
   img.addEventListener("error", () => {
-    const isHeic = photo.src.toLowerCase().endsWith(".heic");
-    if (!isHeic) {
-      errorOverlay.classList.remove("hidden");
-      img.style.display = "none";
-      return;
-    }
-    tryConvertHeicToJpeg(img, photo, errorOverlay);
+    errorOverlay.classList.remove("hidden");
+    img.style.display = "none";
   });
 
   return figure;
