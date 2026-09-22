@@ -40,7 +40,7 @@ module.exports = async function handler(req, res) {
       })
       .filter(Boolean);
 
-    res.setHeader("Cache-Control", "public, max-age=60, s-maxage=300");
+    res.setHeader("Cache-Control", "private, no-store");
     res.status(200).json({ photos });
   } catch (e) {
     console.error("Failed to list photos", e);

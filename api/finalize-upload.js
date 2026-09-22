@@ -58,8 +58,14 @@ module.exports = async function handler(req, res) {
     location = await reverseGeocode(lat, lon);
   }
 
+  // If title wasn't customized, prefer the resolved place name as the title.
+  let resolvedTitle = title;
+  if (location && (!title || title === publicId)) {
+    resolvedTitle = location;
+  }
+
   const context = buildContextString({
-    title,
+    title: resolvedTitle,
     date_taken: dateTaken,
     location,
     note: note || "",
@@ -70,8 +76,9 @@ module.exports = async function handler(req, res) {
       type: "upload",
       context,
       tags: "kash-photo",
+      invalidate: true,
     });
-    res.status(200).json({ ok: true, publicId: result.public_id, location });
+    res.status(200).json({ ok: true, publicId: result.public_id, location, title: resolvedTitle });
   } catch (e) {
     console.error("Finalize upload failed", e);
     res.status(500).json({ error: "Failed to finalize upload" });

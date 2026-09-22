@@ -38,6 +38,7 @@ module.exports = async function handler(req, res) {
       type: "upload",
       context,
       tags: "kash-photo",
+      invalidate: true,
     });
     res.status(200).json({ ok: true, publicId: result.public_id });
   } catch (e) {

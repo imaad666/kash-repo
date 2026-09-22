@@ -1,5 +1,5 @@
 async function loadPhotos() {
-  const res = await fetch("/api/photos");
+  const res = await fetch(`/api/photos?t=${Date.now()}`, { cache: "no-store" });
   if (!res.ok) throw new Error(`Failed to load photos: ${res.status}`);
   const { photos } = await res.json();
 
@@ -669,7 +669,7 @@ function toDateInputValue(date) {
 
 function isoToDateInput(iso) {
   if (!iso) return "";
-  const d = new Date(iso);
+  const d = iso instanceof Date ? iso : new Date(iso);
   if (Number.isNaN(d.getTime())) return "";
   const yyyy = d.getUTCFullYear();
   const mm = String(d.getUTCMonth() + 1).padStart(2, "0");
@@ -812,7 +812,8 @@ adminFile?.addEventListener("change", async () => {
   adminPreview.src = URL.createObjectURL(file);
   adminPreview.classList.remove("hidden");
 
-  if (!adminTitle.value) adminTitle.value = humanizeFilename(file.name);
+  const guessedTitle = humanizeFilename(file.name);
+  if (!adminTitle.value) adminTitle.value = guessedTitle;
   extractedGps = null;
 
   try {
@@ -825,6 +826,26 @@ adminFile?.addEventListener("change", async () => {
     }
     if (typeof output?.latitude === "number" && typeof output?.longitude === "number") {
       extractedGps = { lat: output.latitude, lon: output.longitude };
+
+      // Resolve place name from GPS and use it for location + title.
+      try {
+        const geoRes = await fetch(
+          `/api/geocode?lat=${encodeURIComponent(extractedGps.lat)}&lon=${encodeURIComponent(extractedGps.lon)}`
+        );
+        if (geoRes.ok) {
+          const geo = await geoRes.json();
+          const place = (geo.name || "").trim();
+          if (place) {
+            if (!adminLocation.value) adminLocation.value = place;
+            // Prefer location as title when title is empty or still the filename guess.
+            if (!adminTitle.value || adminTitle.value === guessedTitle) {
+              adminTitle.value = place;
+            }
+          }
+        }
+      } catch (geoErr) {
+        console.warn("Couldn't reverse-geocode photo GPS", geoErr);
+      }
     }
   } catch (e) {
     console.warn("Couldn't read EXIF data from this photo", e);
@@ -888,7 +909,8 @@ adminForm?.addEventListener("submit", async (e) => {
           note: adminNote.value.trim(),
         }),
       });
-      if (!res.ok) throw new Error("Couldn't save changes");
+      const body = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(body.error || "Couldn't save changes");
     }
 
     closeAdminSheet();
