@@ -332,7 +332,9 @@ async function openModalForPhoto(photo, sourceImg) {
 
   modalEl.classList.remove("hidden", "is-closing");
   modalEl.classList.add("is-expanding");
+  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth;
   document.body.style.overflow = "hidden";
+  document.body.style.paddingRight = scrollbarWidth ? `${scrollbarWidth}px` : "";
 
   await nextFrame();
   modalEl.classList.add("is-dimmed");
@@ -386,6 +388,7 @@ async function closeModal() {
     modalImg.style.maxWidth = "";
     modalImg.style.maxHeight = "";
     document.body.style.overflow = "";
+    document.body.style.paddingRight = "";
     if (sourceImg) sourceImg.classList.remove("is-lightboxSource");
     // Drop focus so the browser doesn't draw a selection ring on the thumbnail.
     const focusEl = sourceImg?.closest("button") || document.activeElement;
